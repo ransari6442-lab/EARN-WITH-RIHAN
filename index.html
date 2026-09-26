@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,17 +12,21 @@
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+if(!f._fbq)n._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
 n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
+
 fbq('init', '1471762321456657');
 fbq('track', 'PageView');
 </script>
 
 <noscript>
-<img height="1" width="1" style="display:none"
+<img
+height="1"
+width="1"
+style="display:none"
 src="https://www.facebook.com/tr?id=1471762321456657&ev=PageView&noscript=1"
 />
 </noscript>
@@ -32,98 +37,226 @@ src="https://www.facebook.com/tr?id=1471762321456657&ev=PageView&noscript=1"
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     margin:0;
-    font-family:Poppins,Arial;
+    min-height:100vh;
+    font-family:Poppins,Arial,sans-serif;
     background:#050505;
     color:#fff;
     overflow-x:hidden;
 }
 
-body:before{
-    content:'';
+/* Background Glow */
+body::before{
+    content:"";
     position:fixed;
     inset:0;
+    z-index:-2;
     background:
-    radial-gradient(circle at 50% 20%,rgba(255,0,0,.18),transparent 40%),
-    radial-gradient(circle at 50% 80%,rgba(255,0,0,.12),transparent 35%);
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(255,0,0,.20),
+            transparent 40%
+        ),
+        radial-gradient(
+            circle at 50% 80%,
+            rgba(255,0,0,.13),
+            transparent 35%
+        );
     animation:pulse 6s infinite;
 }
 
 @keyframes pulse{
     50%{
-        filter:brightness(1.4);
+        filter:brightness(1.35);
     }
 }
 
+/* Main Container */
 .c{
+    width:100%;
     max-width:430px;
     margin:auto;
     padding:22px;
     text-align:center;
 }
 
+/* Profile Image */
 .logo{
     width:180px;
     height:180px;
     border-radius:50%;
     border:4px solid #ff2d2d;
-    box-shadow:0 0 35px #f00;
+    box-shadow:
+        0 0 20px #ff0000,
+        0 0 40px rgba(255,0,0,.65);
     object-fit:cover;
+    animation:logoGlow 2s infinite alternate;
 }
 
+@keyframes logoGlow{
+    from{
+        box-shadow:
+            0 0 18px #ff0000,
+            0 0 35px rgba(255,0,0,.5);
+    }
+
+    to{
+        box-shadow:
+            0 0 30px #ff0000,
+            0 0 60px rgba(255,0,0,.8);
+    }
+}
+
+/* Heading */
 h1{
+    margin:20px 0 8px;
     color:#ff3b3b;
     letter-spacing:4px;
+    font-size:32px;
+    text-shadow:0 0 15px rgba(255,0,0,.7);
 }
 
-.card{
-    background:rgba(255,255,255,.06);
-    backdrop-filter:blur(10px);
-    border:1px solid rgba(255,0,0,.4);
-    border-radius:22px;
-    padding:22px;
-    margin:22px 0;
-    box-shadow:0 0 30px rgba(255,0,0,.2);
+.subtitle{
+    color:#ddd;
+    font-size:15px;
+    margin-bottom:20px;
 }
 
+/* Telegram Button */
 .btn{
     display:block;
+    width:100%;
     text-decoration:none;
     color:#fff;
-    background:linear-gradient(90deg,#8b0000,#ff2020);
+    background:linear-gradient(
+        90deg,
+        #8b0000,
+        #ff2020,
+        #8b0000
+    );
+    background-size:200% auto;
     padding:18px;
     border-radius:16px;
     font-size:26px;
     font-weight:bold;
-    box-shadow:0 0 25px red;
-    animation:glow 1.6s infinite;
+    box-shadow:
+        0 0 20px rgba(255,0,0,.7),
+        0 0 40px rgba(255,0,0,.3);
+    animation:
+        glow 1.6s infinite,
+        gradientMove 3s linear infinite;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:scale(1.03);
 }
 
 @keyframes glow{
     50%{
-        transform:scale(1.03);
-        box-shadow:0 0 40px #ff4040;
+        box-shadow:
+            0 0 35px #ff4040,
+            0 0 60px rgba(255,0,0,.4);
     }
 }
 
+@keyframes gradientMove{
+    to{
+        background-position:200% center;
+    }
+}
+
+/* Cards */
+.card{
+    background:rgba(255,255,255,.06);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(255,0,0,.4);
+    border-radius:22px;
+    padding:22px;
+    margin:22px 0;
+    box-shadow:
+        0 0 30px rgba(255,0,0,.18);
+}
+
+/* Timer */
+.timer-title{
+    color:#ffcc66;
+    font-weight:bold;
+    font-size:15px;
+    margin-bottom:5px;
+}
+
+#timer{
+    font-size:54px;
+    line-height:1.2;
+    color:#ffd54a;
+    font-weight:bold;
+    text-shadow:
+        0 0 15px rgba(255,213,74,.7);
+    margin:8px 0;
+}
+
+.small{
+    color:#bbb;
+    font-size:13px;
+}
+
+/* Stats */
 .stats{
     display:flex;
     justify-content:space-between;
+    gap:8px;
 }
 
 .stats div{
     flex:1;
 }
 
-.small{
-    color:#bbb;
+.stats h2{
+    margin:0 0 5px;
+    color:#fff;
+    font-size:22px;
+    text-shadow:0 0 10px rgba(255,0,0,.5);
 }
 
-#timer{
-    font-size:54px;
-    color:#ffd54a;
-    font-weight:bold;
+/* Footer */
+.footer{
+    color:#999;
+    font-size:12px;
+    line-height:1.6;
+    margin-top:25px;
+}
+
+/* Mobile */
+@media(max-width:380px){
+
+    .c{
+        padding:16px;
+    }
+
+    .logo{
+        width:150px;
+        height:150px;
+    }
+
+    h1{
+        font-size:27px;
+        letter-spacing:3px;
+    }
+
+    .btn{
+        font-size:22px;
+    }
+
+    #timer{
+        font-size:48px;
+    }
 }
 </style>
 
@@ -133,97 +266,133 @@ h1{
 
 <div class="c">
 
-<img class="logo"
-src="https://i.ibb.co/j9Wjts0z/download.jpg"
-alt="ZIYA MALIK">
+    <!-- Profile Image -->
+    <img
+        class="logo"
+        src="https://i.ibb.co/j9Wjts0z/download.jpg"
+        alt="ZIYA MALIK"
+    >
 
-<h1>ZIYA MALIK</h1>
+    <!-- Title -->
+    <h1>ZIYA MALIK</h1>
 
-<p>Your Premium Prediction Destination 👑</p>
+    <p class="subtitle">
+        Your Premium Prediction Destination 👑
+    </p>
 
-<a class="btn" href="https://t.me/+evHEniCIPMZlODM1">
-JOIN NOW
-</a>
+    <!-- Telegram Button -->
+    <a
+        class="btn"
+        href="https://t.me/+uL2bs041VKFmNDU1"
+    >
+        JOIN NOW
+    </a>
 
-<div class="card">
+    <!-- Timer -->
+    <div class="card">
 
-<div style="color:#ffcc66;font-weight:bold">
-TIME LEFT FOR FREE JOIN
-</div>
+        <div class="timer-title">
+            TIME LEFT FOR FREE JOIN
+        </div>
 
-<div id="timer">
-00:30
-</div>
+        <div id="timer">
+            00:04
+        </div>
 
-<div class="small">
-Redirecting to Telegram in 30 seconds...
-</div>
+        <div class="small">
+            Redirecting to Telegram in 4 seconds...
+        </div>
 
-</div>
+    </div>
 
-<div class="card stats">
+    <!-- Stats -->
+    <div class="card stats">
 
-<div>
-<h2>50K+</h2>
-<div class="small">MEMBERS</div>
-</div>
+        <div>
+            <h2>50K+</h2>
+            <div class="small">MEMBERS</div>
+        </div>
 
-<div>
-<h2>24/7</h2>
-<div class="small">SUPPORT</div>
-</div>
+        <div>
+            <h2>24/7</h2>
+            <div class="small">SUPPORT</div>
+        </div>
 
-<div>
-<h2>100%</h2>
-<div class="small">SECURE</div>
-</div>
+        <div>
+            <h2>100%</h2>
+            <div class="small">SECURE</div>
+        </div>
 
-</div>
+    </div>
 
-<p class="small">
-© 2025 All rights reserved.<br>
-Ads Managed By <b>@ROJIEADS</b>
-</p>
+    <!-- Footer -->
+    <p class="footer">
+        © 2025 All rights reserved.<br>
+        Ads Managed By <b>@ROJIEADS</b>
+    </p>
 
 </div>
 
 <script>
-// 30 Second Countdown Timer + Telegram Redirect
-let time = 30;
 
-let countdown = setInterval(() => {
-    let min = Math.floor(time / 60);
-    let sec = time % 60;
+/* ==========================================
+   4 SECOND COUNTDOWN + AUTO REDIRECT
+   ========================================== */
 
-    document.getElementById("timer").innerHTML =
-    "0" + min + ":" + (sec < 10 ? "0" : "") + sec;
+const telegramLink =
+    "https://t.me/+uL2bs041VKFmNDU1";
 
-    if (time <= 0) {
+let time = 4;
+
+const timer = document.getElementById("timer");
+
+const countdown = setInterval(function(){
+
+    timer.textContent =
+        "00:" + (time < 10 ? "0" : "") + time;
+
+    if(time <= 0){
+
         clearInterval(countdown);
-        window.location.href = "https://t.me/+evHEniCIPMZlODM1";
-    } else {
-        time--;
+
+        window.location.href = telegramLink;
+
+        return;
     }
-}, 1000);
 
-// Background particles
+    time--;
+
+},1000);
+
+
+/* ==========================================
+   BACKGROUND PARTICLES
+   ========================================== */
+
 for(let i = 0; i < 80; i++){
-    let s = document.createElement('span');
 
-    s.style.cssText =
-    `position:fixed;
-    width:2px;
-    height:2px;
-    background:#f55;
-    border-radius:50%;
-    left:${Math.random()*100}vw;
-    top:${Math.random()*100}vh;
-    opacity:.7;
-    pointer-events:none;`;
+    const particle =
+        document.createElement("span");
 
-    document.body.appendChild(s);
+    particle.style.cssText = `
+        position:fixed;
+        width:2px;
+        height:2px;
+        background:#f55;
+        border-radius:50%;
+        left:${Math.random()*100}vw;
+        top:${Math.random()*100}vh;
+        opacity:${0.3 + Math.random()*0.5};
+        pointer-events:none;
+        z-index:-1;
+    
+
+    document.body.appendChild(particle);
 }
+
 </script>
 
 </body>
 </html>
+
+
